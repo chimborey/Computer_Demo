@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  /* background-color: #070B14; */
+}
+
+/* ========================= Font-Family ================================== */
+.english {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.khmer {
+  font-family: "Noto Sans Khmer", sans-serif;
+}
+
+/* ==================================== Card ============================ */
+.card {
+  background-color: #111827;
+}
+
+/* ================================= Text ======================= */
+.small-label {
+  color: #64748B;
+}
+
+.heading {
+  color: #F8FAFC;
+  transition: all 0.3s linear;
+}
+
+.heading:hover {
+  color: #22D3EE;
+  transition-duration: 0.3s;
+}
+
+/*  ============================ swiper-slide ======================== */
+.swiper-slide {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =============================== No-Scrollbar =========================== */
+@layer utilities {
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
