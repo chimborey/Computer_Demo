@@ -1,63 +1,83 @@
-import { useState, useEffect } from "react";
-import bg_hero from "../../assets/Image/bg_hero.jpg";
-import img_hero from "../../assets/Image/img_hero.png";
-import { Link } from "react-router-dom";
+import video from "../../assets/Hero/257927_medium.mp4"
+import { Link } from "react-router-dom"
+import { ArrowRight } from "lucide-react"
+import { useEffect, useState } from "react"
 
 export default function Home_Hero() {
-      const fullText = "UNLEASH ULTIMATE\nGAMING POWER";
+      const fullText = "Unleash Your Elegance With Every Spray";
       const [displayedText, setDisplayedText] = useState("");
       const [index, setIndex] = useState(0);
+      const [isDeleting, setIsDeleting] = useState(false);
 
       useEffect(() => {
+            const speed = isDeleting ? 50 : 100; // ល្បឿនពេលលុបលឿនជាងពេលវាយអក្សរ
+
             const timer = setTimeout(() => {
-                  if (index < fullText.length) {
-                        // វាយអក្សរចូលម្តងមួយតួ
-                        setDisplayedText(fullText.substring(0, index + 1));
-                        setIndex(index + 1);
-                  } else {
-                        // វាយចប់ហើយ រង់ចាំ 500ms (កន្លះវិនាទី) សឹមចាប់ផ្តើមសារថ្មីភ្លាម
-                        setTimeout(() => {
-                              setDisplayedText("");
-                              setIndex(0);
-                        }, 500);
+                  if (!isDeleting && index <= fullText.length) {
+                        setDisplayedText(fullText.substring(0, index));
+                        setIndex((prev) => prev + 1);
+                  } else if (isDeleting && index >= 0) {
+                        setDisplayedText(fullText.substring(0, index));
+                        setIndex((prev) => prev - 1);
                   }
-            }, 100); // កំណត់ល្បឿនវាយអក្សរ (100ms គឺលឿនបន្តិច និងស្អាត)
+
+                  // ពេលវាយអក្សរចប់សព្វគ្រប់ ឱ្យវាឈប់សម្រាកបន្តិចសិនចាំចាប់ផ្តើមលុប
+                  if (!isDeleting && index > fullText.length) {
+                        setTimeout(() => setIsDeleting(true), 100);
+                  }
+                  // ពេលលុបអស់ហើយ ឱ្យវាប្តូរមកវាយសារថ្មីឡើងវិញ
+                  else if (isDeleting && index === 0) {
+                        setIsDeleting(false);
+                  }
+            }, speed);
 
             return () => clearTimeout(timer);
-      }, [index, fullText]);
+      }, [index, isDeleting, fullText]);
 
       return (
-            <section className="relative w-full min-h-screen flex flex-col items-center justify-center pt-20 pb-10 overflow-hidden bg-black text-white">
-                  <div className="absolute inset-0 z-0">
-                        <img src={bg_hero} alt="Gaming Background" className="w-full h-full object-cover opacity-40" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                  </div>
+            <section className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden">
 
-                  <div className="relative z-10 flex flex-col items-center text-center px-4 w-full mt-12">
-                        <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-wider drop-shadow-[0_0_15px_rgba(59,130,246,0.8)] min-h-[200px] whitespace-pre-line">
+                  {/* Background Video */}
+                  <video
+                        src={video}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover"
+                  />
+
+                  {/* Dark Overlay */}
+                  <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
+
+                  {/* Hero Content */}
+                  <div className="relative z-10 container mx-auto px-4 max-w-7xl text-center flex flex-col items-center space-y-6">
+
+                        <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-medium px-4 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
+                              Discover Signature Scents
+                        </span>
+
+                        {/* Typewriter Loop Effect Text */}
+                        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight max-w-3xl leading-tight min-h-[1.2em]">
                               {displayedText}
-                              <span className="inline-block w-2 md:w-3 h-8 md:h-12 bg-blue-500 ml-1 animate-pulse align-middle"></span>
+                              <span className="animate-pulse">|</span>
                         </h1>
 
-                        {/* បានពង្រីកអត្ថបទឱ្យវែង និងទាក់ទាញជាងមុន */}
-                        <p className="mt-6 text-gray-300 text-base md:text-lg max-w-2xl leading-relaxed">
-                              Experience next-level gaming with our custom-built high-performance laptops. Engineered for extreme speed, stunning visuals, and absolute dominance to give you the ultimate winning edge in every battle.
+                        <p className="text-sm sm:text-base text-gray-200 max-w-xl leading-relaxed">
+                              Explore our exclusive collection of luxury perfumes crafted to leave a lasting impression wherever you go.
                         </p>
 
-                        <Link to={'/shop'}>
-                              <button className="mt-8 px-10 py-3 border-2 border-blue-500 hover:bg-blue-600 hover:shadow-[0_0_20px_rgba(37,99,235,0.7)] text-white font-bold uppercase tracking-widest transition-all duration-300 rounded-full">
-                                    SHOP NOW
-                              </button>
-                        </Link>
-                  </div>
-
-                  <div className="relative z-10 mt-4 w-full max-w-4xl px-4 flex justify-center">
-                        <div className="w-full transition-transform duration-500 hover:scale-105">
-                              <img src={img_hero} alt="Featured Gaming Laptop" className="w-full h-auto drop-shadow-[0_0_30px_rgba(37,99,235,0.3)]" />
+                        <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
+                              <Link
+                                    to="/shop"
+                                    className="flex items-center gap-2 bg-gradient-to-tr from-blue-700 to-sky-600 text-white font-semibold text-sm px-8 py-3.5 rounded-2xl shadow-lg hover:opacity-95 active:scale-95 transition-all"
+                              >
+                                    <span>Explore Collection</span>
+                                    <ArrowRight className="w-4 h-4" />
+                              </Link>
                         </div>
-                  </div>
 
-                  <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-blue-900/30 to-transparent z-0"></div>
+                  </div>
             </section>
-      );
+      )
 }
