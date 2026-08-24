@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion"; // បន្ថែម Framer Motion
-import Zonkhmer from "../../assets/Logo/Zonkhmer.jpg";
+import Zonkhmer from "../../assets/Logo/ZonKhmer.jpg";
 import { MdCloseFullscreen } from "react-icons/md";
 import { CiMenuFries } from "react-icons/ci";
 import ButtonLogin from "../UI/ButtonLogin";

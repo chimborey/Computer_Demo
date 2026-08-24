@@ -1,4 +1,4 @@
-import Zokmher from "../../assets/Logo/Zonkhmer.jpg"
+import Zokmher from "../../assets/Logo/ZonKhmer.jpg"
 
 
 export function Footer_Footer() {

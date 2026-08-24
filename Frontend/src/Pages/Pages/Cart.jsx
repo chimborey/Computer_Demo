@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import CartItems from "../../Components/Cart/CartItems"
 import { useContext, useState } from "react"
 import { ShopContext } from "../../Context/ShopContext"
-import Zonkhmer from "../../assets/Logo/Zonkhmer.jpg"
+import Zonkhmer from "../../assets/Logo/ZonKhmer.jpg"
 import { motion, AnimatePresence } from "framer-motion"
 import qr from "../../assets/Image/qr.png"
 export default function Cart() {
